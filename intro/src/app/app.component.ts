@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 
-const todos = [
+class Todo {
+  constructor(public title: string,
+              public completed: boolean = false) {}
+}
+
+const todos: Todo[] = [
   {
     title: 'Learn JavaScript',
     completed: true
@@ -21,18 +26,26 @@ const todos = [
   styleUrls: ['app.component.css']
 })
 export class AppComponent {
-  title = 'Angular 2Do';
-  todos = todos;
+  title: string = 'Angular 2Do';
+  todos: Todo[] = todos;
+  newTodoTitle: string = '';
 
-  toggle(todo: any) {
+  toggle(todo: Todo) {
     todo.completed = !todo.completed;
   }
 
-  delete(todo: any) {
+  delete(todo: Todo) {
     const index = this.todos.indexOf(todo);
 
     if (index > -1) {
       this.todos.splice(index, 1);
     }
+  }
+
+  create() {
+    let todo: Todo = new Todo(this.newTodoTitle);
+
+    this.todos.push(todo);
+    this.newTodoTitle = '';
   }
 }

@@ -3,6 +3,15 @@
   <h1>{{ title }}</h1>
 </header>
 <main>
+  <form class="todo-form" (ngSubmit)="create(); todoForm.reset()" #todoForm="ngForm">
+    <input type="text"
+           name="title"
+           [(ngModel)]="newTodoTitle"
+           placeholder="What do we have to do?"
+           required>
+    <button type="submit" [disabled]="todoForm.form.invalid">Add</button>
+  </form>
+
   <section class="todo-list" *ngIf="todos.length">
     <div class="todo-item" *ngFor="let todo of todos" [class.completed]="todo.completed">
       <button class="checkbox icon" (click)="toggle(todo)">
