@@ -32,15 +32,33 @@ export class TodoService {
     }
 
     deleteTodo(todo: Todo) {
-        const index = this.todos.indexOf(todo);
+        let headers = new Headers({ 'Content-Type': 'application/json '});
+        let options = new RequestOptions({ headers });
+        let url = `${this.apiUrl}/${todo.id}`;
 
-        if (index > -1) {
-            this.todos.splice(index, 1);
-        }
+        this.http.delete(url, options)
+        .toPromise()
+        .then(res => {
+            let index = this.todos.indexOf(todo);
+
+            if (index > -1) {
+                this.todos.splice(index, 1);
+            }
+        })
+        .catch(this.handleError);
     }
 
     toggleTodo(todo: Todo) {
-        todo.completed = !todo.completed;
+        let headers = new Headers({ 'Content-Type': 'application/json '});
+        let options = new RequestOptions({ headers });
+        let url = `${this.apiUrl}/${todo.id}`;
+
+        this.http.put(url, todo, options)
+        .toPromise()
+        .then(res => {
+            todo.completed = !todo.completed;
+        })
+        .catch(this.handleError);
     }
 
     private handleError(error: any) {
