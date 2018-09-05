@@ -1,17 +1,34 @@
-import { todos } from './data';
+import { Injectable } from '@angular/core';
+import { Http, Headers, RequestOptions } from '@angular/http';
+
 import { Todo } from './todo';
 
+@Injectable()
 export class TodoService {
-    todos: Todo[] = todos;
+    private apiUrl = 'api/todos';
+    todos: Todo[] = [];
 
-    getTodos(): Todo[] {
-        return this.todos;
+    constructor(private http: Http) { }
+
+    getTodos(): Promise<Todo[]> {
+        return this.http
+            .get(this.apiUrl)
+            .toPromise()
+            .then(res => res.json())
+            .then(todos => this.todos = todos)
+            .catch(this.handleError);
     }
 
     createTodo(title: string) {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers });
         let todo = new Todo(title);
 
-        this.todos.push(todo);
+        this.http.post(this.apiUrl, todo, options)
+            .toPromise()
+            .then(res => res.json())
+            .then(todo => this.todos.push(todo))
+            .catch(this.handleError);
     }
 
     deleteTodo(todo: Todo) {
@@ -24,5 +41,11 @@ export class TodoService {
 
     toggleTodo(todo: Todo) {
         todo.completed = !todo.completed;
+    }
+
+    private handleError(error: any) {
+        console.log('Error was thrown ', error);
+
+        return Promise.reject(error.message || error);
     }
 }
