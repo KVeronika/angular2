@@ -6,4 +6,10 @@
 
 <button (click)="changeColor(colorElement.value)">Change color</button>
 
-<app-user-card [user]="user"></app-user-card>
+<button (click)="isShown = !isShown">Toggle</button>
+
+<app-user-card *ngIf="isShown" [user]="user"></app-user-card>
+
+<ul>
+  <li *ngFor="let user of users">{{user.name}}</li>
+</ul>

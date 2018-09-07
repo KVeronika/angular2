@@ -6,12 +6,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  public user  = {
+  public users  = [{
     name: 'John'
-  };
+  }, {
+    name: 'Paul'
+  }, {
+    name: 'Anny'
+  }];
+  public isShown = true;
 
   constructor() {}
 
   ngOnInit() {
+  }
+
+  hide() {
+    this.isShown = false;
   }
 }
