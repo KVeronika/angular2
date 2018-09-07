@@ -1,7 +1,6 @@
-<div *ngFor="let delay of [1, 2, 3]">
-    <app-item *appDelay="delay"></app-item>
-    <!-- equals to -->
-    <!-- <ng-template [appDelay]="delay"> this is viewContainer
-        <app-item></app-item> this is template
-    </ng-template> -->
-</div>
+<!-- here is controller in link colory -->
+<div appColory #colory="colory">Some text</div>
+
+<app-item appColory #colory2="colory"></app-item>
+
+<button (click)="colory.setRandomColor(); colory2.setRandomColor()">Change color</button>
