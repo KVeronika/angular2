@@ -2,5 +2,6 @@
   header works!
 </p>
 
-<input type="text" (input)="changeColor($event.target.value)"
-(keydown.control.enter)="changeColor('green')">
+<input type="text" #colorElement>
+
+<button (click)="changeColor(colorElement.value)">Change color</button>
