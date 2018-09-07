@@ -1,15 +1,7 @@
-<p (click)="changeColor('blue')" [style.color]="myColor">
-  header works!
-</p>
-
-<input type="text" #colorElement>
-
-<button (click)="changeColor(colorElement.value)">Change color</button>
-
-<button (click)="isShown = !isShown">Toggle</button>
-
-<app-user-card *ngIf="isShown" [user]="user"></app-user-card>
-
 <ul>
-  <li *ngFor="let user of users">{{user.name}}</li>
+  <li *ngFor="let user of users">
+    <app-user-card [user]="user" (userSelected)="selectedUser = user"></app-user-card>
+  </li>
 </ul>
+
+<h1>{{ selectedUser?.name }}</h1>

@@ -13,14 +13,9 @@ export class HeaderComponent implements OnInit {
   }, {
     name: 'Anny'
   }];
-  public isShown = true;
+  public selectedUser;
 
   constructor() {}
 
-  ngOnInit() {
-  }
-
-  hide() {
-    this.isShown = false;
-  }
+  ngOnInit() {}
 }
