@@ -6,18 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  public myClass = "red";
+  public myColor = 'red'
 
-  constructor() {
-    setTimeout(() => {
-      this.myClass = 'green';
-      setTimeout(() => {
-        this.myClass = 'blue';
-      }, 2000);
-    }, 2000);
-  }
+  constructor() {}
 
   ngOnInit() {
   }
 
+  changeColor(color) {
+    this.myColor = color;
+  }
 }

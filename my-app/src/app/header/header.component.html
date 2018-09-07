@@ -1,3 +1,6 @@
-<p [class]="myClass">
+<p (click)="changeColor('blue')" [style.color]="myColor">
   header works!
 </p>
+
+<input type="text" (input)="changeColor($event.target.value)"
+(keydown.control.enter)="changeColor('green')">
