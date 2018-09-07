@@ -7,6 +7,7 @@ import { FooterComponent } from './footer/footer.component';
 import { MenuComponent } from './menu/menu.component';
 import { UserCardComponent } from './header/user-card/user-card.component';
 import { ItemComponent } from './item/item.component';
+import { ColoryDirective } from './colory.directive';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { ItemComponent } from './item/item.component';
     FooterComponent,
     MenuComponent,
     UserCardComponent,
-    ItemComponent
+    ItemComponent,
+    ColoryDirective
   ],
   imports: [
     BrowserModule
