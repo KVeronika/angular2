@@ -1,5 +1,5 @@
-import { Component, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
-import { UserService } from './user.service';
+import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +9,9 @@ import { UserService } from './user.service';
 export class AppComponent {
   title = 'my-app';
 
-  constructor (private _userService: UserService) {}
-
-  getNumber() {
-    return this._userService.getNumber();
+  constructor (private _http: HttpClient) {
+    _http.get('https://api.github.com/user').subscribe(users => {
+      console.log(users);
+    });
   }
 }
