@@ -1,4 +1,5 @@
 import { Component, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
+import { UserService } from './user.service';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,9 @@ import { Component, ViewContainerRef, ComponentFactoryResolver } from '@angular/
 export class AppComponent {
   title = 'my-app';
 
-  constructor (private viewContainerRef: ViewContainerRef,
-    private componentFactoryResolver: ComponentFactoryResolver) {}
+  constructor (private _userService: UserService) {}
+
+  getNumber() {
+    return this._userService.getNumber();
+  }
 }
