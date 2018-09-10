@@ -1,4 +1,6 @@
 <a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
-<a routerLink="users" routerLinkActive="active">Users</a>
+<a routerLink="users" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Users</a>
+<a routerLink="users" [queryParams]="{q: 1111}" routerLinkActive="active">Users with query</a>
+<a [routerLink]="['users', userId]" routerLinkActive="active">User {{userId}}</a>
 
 <router-outlet></router-outlet>
