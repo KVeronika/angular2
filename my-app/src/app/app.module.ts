@@ -1,21 +1,20 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
 
 import { AppComponent } from './app.component';
-import { MyInterceptor } from './my-interceptor.service';
+import { UserService } from './user.service';
+import { HttpClient } from 'selenium-webdriver/http';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule,
-    HttpClientModule
+    BrowserModule
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS, useClass: MyInterceptor, multi: true
-  }],
+  providers: [
+    { provide: UserService, useClass: UserService, deps: [HttpClient] }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

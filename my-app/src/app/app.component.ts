@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -8,10 +7,4 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent {
   title = 'my-app';
-
-  constructor (private _http: HttpClient) {
-    _http.get('https://api.github.com/user').subscribe(users => {
-      console.log(users);
-    });
-  }
 }
