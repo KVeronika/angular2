@@ -1,19 +1,25 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { UserService } from './user.service';
-import { HttpClient } from 'selenium-webdriver/http';
+import { HomeComponent } from './home/home.component';
+import { UsersComponent } from './users/users.component';
+
+const routes = [
+  { path: '', component: HomeComponent },
+  { path: 'users', component: UsersComponent },
+];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    UsersComponent
   ],
   imports: [
-    BrowserModule
-  ],
-  providers: [
-    { provide: UserService, useClass: UserService, deps: [HttpClient] }
+    BrowserModule,
+    RouterModule.forRoot(routes)
   ],
   bootstrap: [AppComponent]
 })
