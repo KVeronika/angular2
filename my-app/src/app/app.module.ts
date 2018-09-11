@@ -9,10 +9,15 @@ import { UserComponent } from './user/user.component';
 import { AuthGuard } from './auth.guard';
 import { UserResolveService } from './user-resolve.service';
 import { AuthService } from './auth.service';
+import { CustomPreloadingStrategy } from './custom-preloading-strategy';
 
 const routes = [
   { path: '', component: HomeComponent },
-  { path: 'admin', loadChildren: './admin/admin.module#AdminModule'},
+  { path: 'admin',
+/*     data: {
+      nopreload: false
+    }, */
+    loadChildren: './admin/admin.module#AdminModule'},
   { path: 'users',
     canActivate: [ AuthGuard ],
     resolve: {
@@ -36,9 +41,9 @@ const routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, { preloadingStrategy: CustomPreloadingStrategy })
   ],
-  providers: [ AuthGuard, AuthService, UserResolveService ],
+  providers: [ AuthGuard, AuthService, UserResolveService, CustomPreloadingStrategy ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
