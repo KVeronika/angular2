@@ -6,15 +6,12 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { UsersComponent } from './users/users.component';
 import { UserComponent } from './user/user.component';
+import { AdminComponent } from './admin/admin.component';
 
 const routes = [
   { path: '', component: HomeComponent },
-  { path: 'users',
-    data: {
-      title: 'Users',
-      anotherParam: 'Test'
-    },
-    component: UsersComponent },
+  { path: 'admin', component: AdminComponent},
+  { path: 'users', component: UsersComponent },
   { path: 'users/:userId', component: UserComponent },
 ];
 
@@ -23,7 +20,8 @@ const routes = [
     AppComponent,
     HomeComponent,
     UsersComponent,
-    UserComponent
+    UserComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
