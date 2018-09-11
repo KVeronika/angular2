@@ -13,9 +13,11 @@ export class UsersComponent implements OnInit {
     this.route.queryParams.subscribe(params => console.log(params));
     this.route.data.subscribe(data => console.log(data));
 
-    this.router.events.subscribe((event: Event) => { 
+    this.route.data.subscribe(data => console.log(data.user));
+
+    this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
-        console.log(event) 
+        console.log(event);
       }
     });
   }

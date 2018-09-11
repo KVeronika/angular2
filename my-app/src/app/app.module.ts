@@ -6,18 +6,24 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { UsersComponent } from './users/users.component';
 import { UserComponent } from './user/user.component';
-import { AdminComponent } from './admin/admin.component';
-import { ProfileComponent } from './profile/profile.component';
-import { SettingsComponent } from './settings/settings.component';
+import { AuthGuard } from './auth.guard';
+import { UserResolveService } from './user-resolve.service';
+import { AuthService } from './auth.service';
 
 const routes = [
   { path: '', component: HomeComponent },
-  { path: 'admin', component: AdminComponent},
-  { path: 'users', component: UsersComponent },
-  { path: 'users/:userId', component: UserComponent, children: [
-    { path: 'profile', component: ProfileComponent },
-    { path: 'settings', component: SettingsComponent }
-  ] },
+  { path: 'users',
+    canActivate: [ AuthGuard ],
+    resolve: {
+      user: UserResolveService
+    },
+    data: {
+      title: 'Some title',
+      anotherParam: 'Another'
+    },
+    component: UsersComponent
+  },
+  { path: 'users/:userId', component: UserComponent }
 ];
 
 @NgModule({
@@ -25,15 +31,13 @@ const routes = [
     AppComponent,
     HomeComponent,
     UsersComponent,
-    UserComponent,
-    AdminComponent,
-    ProfileComponent,
-    SettingsComponent
+    UserComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes)
   ],
+  providers: [ AuthGuard, AuthService, UserResolveService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
