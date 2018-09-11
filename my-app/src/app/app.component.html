@@ -1,5 +1,10 @@
 <a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
 <a routerLink="users" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Users</a>
 <a [routerLink]="['users', userId]" routerLinkActive="active">User {{userId}}</a>
+<br/>
+<a [routerLink]="[{ outlets: {popup: 'login'} }]">Show login</a>
+<a [routerLink]="[{ outlets: {popup: null} }]">Hide login</a>
 
 <router-outlet></router-outlet>
+
+<router-outlet name="popup"></router-outlet>
