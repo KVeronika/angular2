@@ -9,11 +9,10 @@ import { UserComponent } from './user/user.component';
 import { AuthGuard } from './auth.guard';
 import { UserResolveService } from './user-resolve.service';
 import { AuthService } from './auth.service';
-import { LoginComponent } from './login/login.component';
 
 const routes = [
   { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent, outlet: 'popup' },
+  { path: 'admin', loadChildren: './admin/admin.module#AdminModule'},
   { path: 'users',
     canActivate: [ AuthGuard ],
     resolve: {
@@ -33,8 +32,7 @@ const routes = [
     AppComponent,
     HomeComponent,
     UsersComponent,
-    UserComponent,
-    LoginComponent
+    UserComponent
   ],
   imports: [
     BrowserModule,
