@@ -7,12 +7,17 @@ import { HomeComponent } from './home/home.component';
 import { UsersComponent } from './users/users.component';
 import { UserComponent } from './user/user.component';
 import { AdminComponent } from './admin/admin.component';
+import { ProfileComponent } from './profile/profile.component';
+import { SettingsComponent } from './settings/settings.component';
 
 const routes = [
   { path: '', component: HomeComponent },
   { path: 'admin', component: AdminComponent},
   { path: 'users', component: UsersComponent },
-  { path: 'users/:userId', component: UserComponent },
+  { path: 'users/:userId', component: UserComponent, children: [
+    { path: 'profile', component: ProfileComponent },
+    { path: 'settings', component: SettingsComponent }
+  ] },
 ];
 
 @NgModule({
@@ -21,7 +26,9 @@ const routes = [
     HomeComponent,
     UsersComponent,
     UserComponent,
-    AdminComponent
+    AdminComponent,
+    ProfileComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
