@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup, FormArray } from '@angular/forms';
 import { of, Observable } from 'rxjs';
 
 @Component({
@@ -10,6 +10,8 @@ import { of, Observable } from 'rxjs';
 export class AppComponent implements OnInit {
   title = 'my-app';
   nameControl: FormControl;
+  fullNameControl: FormGroup;
+  userListControl: FormGroup;
 
   ngOnInit() {
     this.nameControl = new FormControl('John', [myValidator(5)], [myAsyncValidator]);
@@ -19,6 +21,31 @@ export class AppComponent implements OnInit {
       console.log(this.nameControl.errors);
       console.log(status);
     });
+
+    this.fullNameControl = new FormGroup({
+      firstName: new FormControl(),
+      lastName: new FormControl()
+    });
+
+    this.fullNameControl.valueChanges.subscribe(value => console.log(value));
+
+    this.userListControl = new FormGroup({
+      users: new FormArray([
+        new FormControl('Alice'),
+        new FormControl('Bob'),
+        new FormControl('John')
+      ])
+    });
+
+    this.userListControl.valueChanges.subscribe(value => console.log(value));
+  }
+
+  removeUserControl(index: number) {
+    (this.userListControl.controls['users'] as FormArray).removeAt(index);
+  }
+
+  addUserControl() {
+    (this.userListControl.controls['users'] as FormArray).push(new FormControl(''));
   }
 }
 
