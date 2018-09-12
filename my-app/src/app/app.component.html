@@ -1,16 +1,7 @@
-<input [formControl]="nameControl">
+<app-traffic [formControl]="trafficControl"></app-traffic>
 
-<fieldset [formGroup]="fullNameControl">
-    <input formControlName="firstName">
-    <input formControlName="lastName">
-</fieldset>
-
-<form [formGroup]="userListControl">
-    <ul formArrayName="users">
-        <li *ngFor="let userControl of userListControl.controls.users.controls; let i = index">
-            <input formControlName="{{i}}">
-            <button (click)="removeUserControl(i)">Remove</button>
-        </li>
-    </ul>
-</form>
-<button (click)="addUserControl()">Add user</button>
+<div>
+  <span *ngIf="trafficControl.value === 'green'" >Go!</span>
+  <span *ngIf="trafficControl.value === 'yellow'" >Ready?</span>
+  <span *ngIf="trafficControl.value === 'red'" >Stop!</span>
+</div>
